@@ -1,3 +1,4 @@
+
 {
   "name": "nextogram",
   "version": "0.1.0",
@@ -5,7 +6,8 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win"
+    "build": "electron-builder --win",
+    "dist": "electron-builder --win nsis"
   },
   "dependencies": {
     "telegram": "^2.26.0"
@@ -17,7 +19,26 @@
   "build": {
     "appId": "app.nextogram.client",
     "productName": "NextoGram",
-    "files": ["src/**/*", "package.json"],
-    "win": { "target": "nsis" }
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   }
 }
